@@ -77,6 +77,6 @@ def coordinate_parser(input_string):
   elif(input_string == "G"):
     coordinates[1] = 6
   return coordinates
-
-turn_counter = 0
     
+  turn_counter = 0 
+for i in range 
