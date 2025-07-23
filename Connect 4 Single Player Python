@@ -1,0 +1,82 @@
+
+print("Connect Four")
+print(" ")
+
+top_numbers = ["A", "B", "C", "D", "E", "F", "G"]
+
+board = [["","","","","","",""], ["","","","","","",""], ["","","","","","",""], ["","","","","","",""], ["","","","","","",""], ["","","","","","",""],]
+
+rows = 6
+columns = 7
+
+def print_board():
+  print("\n     A    B    C    D    E    F    G  ")
+  for i in range(rows):
+    print("   +----+----+----+----+----+----+----+")
+    print(i, " |", end="")
+    for x in range(columns):
+      if(board[i][x] == "🔴"):
+          print(" " + board[i][x], end=" |")
+      elif(board[i][x] == "🟡"):
+          print(" " + board[i][x], end=" |")
+      else:
+          print("   ", end=" |")
+    print()
+  print("   +----+----+----+----+----+----+----+")
+
+print_board()
+
+def modify_turn(space_picked, turn):
+  board[space_picked[0]][space_picked[1]] = turn
+
+def check_winner(chip):
+  # Checking the horizontal locations for a win
+  for x in range(rows - 3):
+    for i in range(columns):
+      if(board[x][i] == chip and board[x][i+1] == chip and board[x][i+2] == chip and board[x][i+3] == chip):
+        print("\n Game Over", chip, "wins! Thanks for playing!")
+        return True
+
+  # Checking the vertical locations for a win
+  for x in range(rows):
+    for i in range(columns - 3):
+      if(board[x][i] == chip and board[x][i+1] == chip and board[x][i+2] == chip and board[x][i+3] == chip):
+        print("\n Game Over", chip, "wins! Thanks for playing!")
+        return True
+
+  # Checking the diagonal locations for a win
+  for x in range(rows - 3):
+    for i in range(3, columns):
+      if(board[x][i] == chip and board[x+1][i-1] == chip and board[x+2][i-2] == chip and board[x+3][i-3] == chip):
+        print("\n Game Over", chip, "wins! Thanks for playing!")
+        return True
+
+  # Checking the diagonal locations for a win  
+  for x in range(rows - 3):
+    for i in range(columns - 3):
+      if(board[x][i] == chip and board[x+1][i+1] == chip and board[x+2][i+2] == chip and board[x+3][i+3] == chip):
+        print("\n Game Over", chip, "wins! Thanks for playing!")
+        return True
+
+  return False
+
+def coordinate_parser(input_string):
+  coordinates = [None] * 2
+  if(input_string == "A"):
+    coordinates[1] = 0
+  elif(input_string == "B"):
+    coordinates[1] = 1
+  elif(input_string == "C"):
+    coordinates[1] = 2
+  elif(input_string == "D"):
+    coordinates[1] = 3
+  elif(input_string == "E"):
+    coordinates[1] = 4
+  elif(input_string == "F"):
+    coordinates[1] = 5
+  elif(input_string == "G"):
+    coordinates[1] = 6
+  return coordinates
+
+turn_counter = 0
+    
